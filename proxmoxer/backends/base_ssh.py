@@ -5,7 +5,7 @@ __licence__ = 'MIT'
 
 from itertools import chain
 import json
-
+import logging
 
 class Response(object):
     def __init__(self, content, status_code):
@@ -57,6 +57,7 @@ class JsonSimpleSerializer(object):
 
     def loads(self, response):
         try:
+            logger = logging.getLogger('proxmoxdeploy.cli')
             return json.loads(response.content)
         except ValueError:
             return response.content

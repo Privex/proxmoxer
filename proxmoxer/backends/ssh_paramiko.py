@@ -56,8 +56,13 @@ class ProxmoxParamikoSession(ProxmoxBaseSSHSession):
             cmd = 'sudo ' + cmd
         session = self.ssh_client.get_transport().open_session()
         session.exec_command(cmd)
-        stdout = ''.join(session.makefile('rb', -1))
-        stderr = ''.join(session.makefile_stderr('rb', -1))
+        stdout = b''.join(session.makefile('rb', -1))
+        stderr = b''.join(session.makefile_stderr('rb', -1))
+        stdout = stdout.decode('utf-8')
+        stderr = stderr.decode('utf-8')
+        print('Running cmd.. "' + cmd + '"')
+        print(stdout)
+        print(stderr)
         return stdout, stderr
 
     def upload_file_obj(self, file_obj, remote_path):
