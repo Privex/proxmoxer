@@ -60,9 +60,6 @@ class ProxmoxParamikoSession(ProxmoxBaseSSHSession):
         stderr = b''.join(session.makefile_stderr('rb', -1))
         stdout = stdout.decode('utf-8')
         stderr = stderr.decode('utf-8')
-        print('Running cmd.. "' + cmd + '"')
-        print(stdout)
-        print(stderr)
         return stdout, stderr
 
     def upload_file_obj(self, file_obj, remote_path):
